@@ -1,0 +1,107 @@
+/* .nav {
+ padding: 24px 48px;
+ font-family: "Inter", sans-serif;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+}
+ .navLeft {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .logoContainer {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #9ae600; 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .logo {
+        display: block;
+        width: 18px;
+        height: 18px;
+        color: white;
+      }
+    }
+
+    span {
+      font-size: 18px;
+      font-weight: 500;
+    } 
+  } 
+   
+  .navRight {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+   
+    .dashboardBtn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 12px;
+
+      .logoContainer {
+        width: 24px;
+        height: 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .logo {
+          display: block;
+          width: 16px;
+          height: 16px;
+        }
+      }
+
+      span {
+        font-family: "Inter";
+        font-size: 14px;
+        font-weight: 500;
+      }
+    }
+
+    .userProfile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      .logoContainer {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-color: #51a2ff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .logo {
+          display: block;
+          color: white;
+          font-family: "Inter";
+          font-size: 12px;
+          font-weight: 600;
+        }
+      }
+
+      span {
+        font-family: "Inter";
+        font-size: 14px;
+        font-weight: 600;
+        color: #333;
+      }
+    }
+  }
+}
+  
+
+
+
+
+
+
+ */
