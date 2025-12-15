@@ -12,7 +12,15 @@ const AnomaliesPage = () => {
   }
 
   if (isErrorSolarUnit) {
-    return <div>Error: {errorSolarUnit.message}</div>;
+    console.error("getSolarUnitForUser error:", errorSolarUnit);
+    const status = errorSolarUnit?.status || (errorSolarUnit?.originalStatus) || "unknown";
+    const data = errorSolarUnit?.data || errorSolarUnit?.error || null;
+    return (
+      <div>
+        <div>Error loading solar unit (status: {String(status)})</div>
+        <pre style={{whiteSpace: 'pre-wrap', marginTop: 8}}>{JSON.stringify(data, null, 2)}</pre>
+      </div>
+    );
   }
 
   console.log(solarUnit);

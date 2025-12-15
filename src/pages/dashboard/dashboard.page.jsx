@@ -14,10 +14,19 @@ const DashboardPage = () => {
       return <div>Loading...</div>;
     }
 
-    if(isErrorSolarUnit) {
-      return <div>Error: {errorSolarUnit.message}</div>;
-    }
-    console.log("Solar Unit:", solarUnit);
+      if(isErrorSolarUnit) {
+        // Log full error for debugging (status, data, originalError)
+        console.error("getSolarUnitForUser error:", errorSolarUnit);
+        const status = errorSolarUnit?.status || (errorSolarUnit?.originalStatus) || "unknown";
+        const data = errorSolarUnit?.data || errorSolarUnit?.error || null;
+        return (
+          <div>
+            <div>Error loading solar unit (status: {String(status)})</div>
+            <pre style={{whiteSpace: 'pre-wrap', marginTop: 8}}>{JSON.stringify(data, null, 2)}</pre>
+          </div>
+        );
+      }
+      console.log("Solar Unit:", solarUnit);
 
   return (
     <>
