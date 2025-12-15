@@ -6,40 +6,22 @@ const baseUrl =  "https://helionx-back-end-praneesha.onrender.com/api";
 
 export const api = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({
-    baseUrl: baseUrl,
-    prepareHeaders: async (headers) => {
-      // Access Clerk instance from window (if present) and attempt to attach token.
-      // Add logging to help diagnose server 500 errors caused by missing/invalid auth.
-      try {
-        const clerk = window?.Clerk;
-        if (clerk) {
-          console.log("Clerk instance found in prepareHeaders.");
-          // getToken may throw or return undefined; wrap in try/catch
-          let token;
-          try {
-            token = await clerk.session.getToken();
-          } catch (e) {
-            console.warn("Error while getting Clerk token:", e);
-          }
+  baseQuery: fetchBaseQuery({ baseUrl: baseUrl  , prepareHeaders: async (headers) => {
+    //window.clerk means accessing the Clerk instance from the global window object
+ 
+    const clerk = window.Clerk;
+    if (clerk) {
+      console.log("Clerk instance found.");
+       const token = await clerk.session.getToken();
 
-          if (token) {
-            headers.set("Authorization", `Bearer ${token}`);
-            console.log("Attached Authorization header (Bearer token).");
-          } else {
-            console.log("No Clerk token available — Authorization header not set.");
-          }
-        } else {
-          console.log("No Clerk instance on window — skipping auth header.");
-        }
-      } catch (err) {
-        // Ensure prepareHeaders never throws and breaks requests
-        console.error("prepareHeaders error:", err);
-      }
+       if(token) {
+        // Set the Authorization header with the Clerk token
+         headers.set("Authorization", `Bearer ${token}`);
+       }
+    }
 
-      return headers;
-    },
-  }),
+    return headers;
+}}),
 
 
   endpoints: (build) => ({
