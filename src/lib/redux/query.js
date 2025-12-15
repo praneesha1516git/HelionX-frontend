@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const baseUrl =  "https://helionx-back-end-praneesha.onrender.com/api";
+const baseUrl =  import.meta.env.VITE_BACKEND_URL + "/api";
 
 // Define a service using a base URL and expected endpoints
 
