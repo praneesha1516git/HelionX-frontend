@@ -17,6 +17,7 @@ export const api = createApi({
        if(token) {
         // Set the Authorization header with the Clerk token
          headers.set("Authorization", `Bearer ${token}`);
+         console.log("Authorization header set in query.js");
        }
     }
 
