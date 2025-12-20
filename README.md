@@ -1,12 +1,12 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Solar Energy Generation Anomalies – Detection, Severity & User Impact
+Anomaly Type	Anomaly Name	Detection Method	Severity Level	User Impact & Recommended Action
+Point Anomaly	Sudden Energy Spike	Statistical thresholding using daily Interquartile Range (IQR) calculated only on daylight intervals (06:00–18:00). A value above Q3 + 1.5 × IQR is flagged.	Warning	Indicates possible sensor malfunction or data corruption. User should verify sensor calibration and inspect data pipeline for errors.
+Point Anomaly	Sudden Energy Drop	Rule-based check: if energy generation is zero during daylight hours, it is flagged as an anomaly.	Critical	Suggests inverter failure, panel disconnection, or heavy shading. User should immediately inspect the solar unit and restore operation.
+Contextual Anomaly	Night-Time Energy Generation	Time-based validation: if energy is recorded after 18:00 or before 06:00, it is flagged.	Info	Indicates incorrect timestamping or faulty sensors. User should check system clock synchronization and sensor configuration.
+Collective Anomaly	Flat-Line Pattern	Variance analysis across daily 2-hour intervals. Near-zero variance indicates abnormal constant readings.	Critical	Suggests frozen sensor or backend aggregation failure. User should restart sensors and verify data ingestion services.
+Collective Anomaly	Missing Noon Peak	Peak detection by comparing the current day’s maximum energy against historical midday peak averages. If current peak < 50% of historical average, anomaly is flagged.	Warning	Indicates reduced panel efficiency due to dirt, shading, or weather issues. User should inspect panels and consider maintenance.
+Collective Anomaly	Gradual Performance Degradation	Trend analysis using rolling averages and linear regression slope over a defined time window (e.g., 7 days). A consistently negative slope indicates degradation.	Warning	Indicates long-term efficiency loss due to aging or dust buildup. User should schedule preventive maintenance or cleaning.
+Data Quality Anomaly	Missing Interval Records	Interval count validation: expected 12 records per day (2-hour intervals). Missing records trigger anomaly.	Warning	Leads to incomplete analysis and inaccurate reports. User should check network connectivity and data ingestion reliability.
+Data Quality Anomaly	Duplicate Interval Records	Database-level uniqueness constraints on (solarUnitId, timestamp) and duplicate timestamp checks.	Info	Can cause incorrect aggregation results. User should resolve data duplication and enforce database constraints.
