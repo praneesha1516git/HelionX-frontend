@@ -1,44 +1,63 @@
 import { useGetSolarUnitByIdQuery } from "@/lib/redux/query";
 import { useNavigate, useParams } from "react-router";
 import { EditSolarUnitForm } from "./components/EditSolarUnitForm";
-
-
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
 
 export default function SolarUnitEditPage() {
+  const { id } = useParams();
+  const navigate = useNavigate();
 
-   const {id} = useParams();
-   const navigate = useNavigate();
-   
-   const {data:solarUnit , isLoading: isLoadingSolarUnit , isError:isErrorSolarUnit , error: errorSolarUnit} = useGetSolarUnitByIdQuery(id);
-  
-   console.log("Solar Unit Data for Edit Page:" , solarUnit);
+  const {
+    data: solarUnit,
+    isLoading: isLoadingSolarUnit,
+    isError: isErrorSolarUnit,
+    error: errorSolarUnit,
+  } = useGetSolarUnitByIdQuery(id);
 
-   if(isLoadingSolarUnit){
-    return <div>Loading...</div>;
-   }
-
-   if(isErrorSolarUnit){
-    return <div>Error: {errorSolarUnit?.data?.message || 'Failed to load solar unit data.'}</div>;
-   }
-
-   const handleEdit = () => {
-    console.log("Edit solar unit " , solarUnit._id);
-   }
-
-   const handleDelete = () => {
-    console.log("Delete solar unit " , solarUnit._id);
-   }
-
-
+  if (isLoadingSolarUnit) {
     return (
-        <main className="mt-4">
-         <h1 className="text-4xl font-bold text-foreground">Edit Solar Unit</h1>
-         <h2 className="mt-4 text-2xl font-bold text-foreground">{solarUnit.serialNumber}</h2>
-        <p className="text-gray-600 mt-2">Edit the details of the solar unit</p>
-      
-      <div className="mt-8">
-        <EditSolarUnitForm solarUnit={solarUnit} />
+      <div className="min-h-screen flex items-center justify-center bg-gray-200">
+        <div className="bg-white/60 backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl px-6 py-4 text-gray-700">
+          Loading solar unit...
+        </div>
       </div>
-    </main>
     );
+  }
+
+  if (isErrorSolarUnit) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-200">
+        <div className="bg-white/60 backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl px-6 py-4 text-red-700">
+          Error: {errorSolarUnit?.data?.message || "Failed to load solar unit data."}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen relative overflow-hidden bg-gray-200">
+     
+
+      <main className="relative   px-4 py-0 ">
+        <div className=" p-6 flex flex-col gap-2">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => navigate("/admin/solar-units")}
+            className="gap-2 w-fit text-gray-600 hover:text-gray-900 hover:bg-white"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Solar Units
+          </Button>
+          <h1 className="text-3xl font-bold text-gray-900">Edit Solar Unit</h1>
+          <p className="text-gray-600">Update the details of the solar unit</p>
+        </div>
+
+        <div className="bg-white/40 backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl p-8">
+          <EditSolarUnitForm solarUnit={solarUnit} />
+        </div>
+      </main>
+    </div>
+  );
 }

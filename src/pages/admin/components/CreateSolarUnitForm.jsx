@@ -28,6 +28,7 @@ export function CreateSolarUnitForm() {
         resolver: zodResolver(formSchema),
     })
  
+    //RTK query mutation hook to create solar unit
    const [createSolarUnit , {isLoading:isCreatingSolarUnit}] = useCreateSolarUnitMutation();
 
    const submit = async function onSubmit(values) {
@@ -63,7 +64,7 @@ return(
                         <FormItem>
                             <FormLabel>Installation Date</FormLabel>
                             <FormControl>
-                                <Input placeholder="Installation Date" {...field} />
+                                <Input type="date" placeholder="Installation Date" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>

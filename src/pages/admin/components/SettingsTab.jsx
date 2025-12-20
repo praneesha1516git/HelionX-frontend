@@ -24,27 +24,19 @@ export function SettingsTab() {
   };
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-bold text-foreground">Settings</h2>
-        <p className="text-sm text-muted-foreground mt-1">
-          Configure admin panel and system-wide settings
-        </p>
-      </div>
+    <Card className="p-6 bg-white/40 backdrop-blur-xl border border-white/20 shadow-2xl space-y-6">
+    
 
       {/* General Settings */}
-      <Card className="p-6">
-        <div className="flex items-center gap-3 mb-4">
+      <div className="space-y-4">
+        <div className="flex items-center gap-3">
           <Settings className="w-5 h-5 text-blue-500" />
-          <h3 className="text-lg font-semibold text-foreground">
-            General Settings
-          </h3>
+          <h3 className="text-lg font-semibold text-gray-900">General Settings</h3>
         </div>
-        <Separator className="my-4" />
-
+        <Separator className="border-white/40" />
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">
+            <label className="block text-sm font-medium text-gray-800 mb-2">
               Application Name
             </label>
             <Input
@@ -53,105 +45,91 @@ export function SettingsTab() {
               placeholder="Enter application name"
             />
           </div>
-
-          <div className="flex items-center justify-between p-3 border rounded-md bg-muted/50">
+          <div className="flex items-center justify-between p-3 border border-white/30 rounded-lg bg-white/30">
             <div>
-              <p className="font-medium text-foreground">Maintenance Mode</p>
-              <p className="text-sm text-muted-foreground">
+              <p className="font-medium text-gray-900">Maintenance Mode</p>
+              <p className="text-sm text-gray-600">
                 Disable access for regular users
               </p>
             </div>
             <input
               type="checkbox"
               checked={settings.maintenanceMode}
-              onChange={(e) =>
-                handleChange("maintenanceMode", e.target.checked)
-              }
+              onChange={(e) => handleChange("maintenanceMode", e.target.checked)}
               className="w-5 h-5"
             />
           </div>
         </div>
-      </Card>
+      </div>
 
-      {/* Notification Settings */}
-      <Card className="p-6">
-        <div className="flex items-center gap-3 mb-4">
+      {/* Notifications */}
+      <div className="space-y-4">
+        <div className="flex items-center gap-3">
           <Bell className="w-5 h-5 text-orange-500" />
-          <h3 className="text-lg font-semibold text-foreground">
-            Notifications
-          </h3>
+          <h3 className="text-lg font-semibold text-gray-900">Notifications</h3>
         </div>
-        <Separator className="my-4" />
-
-        <div className="space-y-4">
-          <div className="flex items-center justify-between p-3 border rounded-md bg-muted/50">
-            <div>
-              <p className="font-medium text-foreground">Email Notifications</p>
-              <p className="text-sm text-muted-foreground">
-                Receive email alerts for system events
-              </p>
-            </div>
-            <input
-              type="checkbox"
-              checked={settings.emailNotifications}
-              onChange={(e) =>
-                handleChange("emailNotifications", e.target.checked)
-              }
-              className="w-5 h-5"
-            />
-          </div>
-        </div>
-      </Card>
-
-      {/* Data Settings */}
-      <Card className="p-6">
-        <div className="flex items-center gap-3 mb-4">
-          <Database className="w-5 h-5 text-purple-500" />
-          <h3 className="text-lg font-semibold text-foreground">Data</h3>
-        </div>
-        <Separator className="my-4" />
-
-        <div className="space-y-4">
+        <Separator className="border-white/40" />
+        <div className="flex items-center justify-between p-3 border border-white/30 rounded-lg bg-white/30">
           <div>
-            <label className="block text-sm font-medium text-foreground mb-2">
-              Log Retention (days)
-            </label>
-            <Input
-              type="number"
-              value={settings.logRetention}
-              onChange={(e) => handleChange("logRetention", e.target.value)}
-              placeholder="Enter days"
-            />
-            <p className="text-xs text-muted-foreground mt-1">
-              Logs older than this duration will be automatically deleted
+            <p className="font-medium text-gray-900">Email Notifications</p>
+            <p className="text-sm text-gray-600">
+              Receive email alerts for system events
             </p>
           </div>
+          <input
+            type="checkbox"
+            checked={settings.emailNotifications}
+            onChange={(e) => handleChange("emailNotifications", e.target.checked)}
+            className="w-5 h-5"
+          />
         </div>
-      </Card>
+      </div>
 
-      {/* Security Settings */}
-      <Card className="p-6">
-        <div className="flex items-center gap-3 mb-4">
+      {/* Data */}
+      <div className="space-y-4">
+        <div className="flex items-center gap-3">
+          <Database className="w-5 h-5 text-purple-500" />
+          <h3 className="text-lg font-semibold text-gray-900">Data</h3>
+        </div>
+        <Separator className="border-white/40" />
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-gray-800 mb-1">
+            Log Retention (days)
+          </label>
+          <Input
+            type="number"
+            value={settings.logRetention}
+            onChange={(e) => handleChange("logRetention", e.target.value)}
+            placeholder="Enter days"
+          />
+          <p className="text-xs text-gray-600">
+            Logs older than this duration will be automatically deleted
+          </p>
+        </div>
+      </div>
+
+      {/* Security */}
+      <div className="space-y-4">
+        <div className="flex items-center gap-3">
           <Lock className="w-5 h-5 text-red-500" />
-          <h3 className="text-lg font-semibold text-foreground">Security</h3>
+          <h3 className="text-lg font-semibold text-gray-900">Security</h3>
         </div>
-        <Separator className="my-4" />
-
-        <div className="space-y-4">
-          <Button variant="outline" className="w-full">
+        <Separator className="border-white/40" />
+        <div className="space-y-3">
+          <Button variant="outline" className="w-full border-white/40">
             Reset Admin Passwords
           </Button>
-          <Button variant="outline" className="w-full">
+          <Button variant="outline" className="w-full border-white/40">
             View Audit Logs
           </Button>
         </div>
-      </Card>
-
-      {/* Save Button */}
-      <div className="flex justify-end gap-3">
-        <Button variant="outline">Cancel</Button>
-        <Button onClick={handleSave}>Save Settings</Button>
       </div>
-    </div>
+
+      {/* Actions */}
+      <div className="flex justify-end gap-3 pt-2">
+        <Button variant="outline" className="border-white/40">Cancel</Button>
+        <Button onClick={handleSave} className="bg-blue-600 hover:bg-blue-700 text-white">Save Settings</Button>
+      </div>
+    </Card>
   );
 }

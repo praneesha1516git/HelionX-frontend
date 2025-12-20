@@ -14,7 +14,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useEditSolarUnitMutation } from "@/lib/redux/query"
-import { useParams } from "react-router"
+import { useParams, useNavigate } from "react-router"
 import { useGetAllUsersQuery } from "@/lib/redux/query"
 
 const formSchema = z.object({
@@ -30,7 +30,7 @@ export function EditSolarUnitForm({ solarUnit }) {
         resolver: zodResolver(formSchema),
         defaultValues: {
             serialNumber: solarUnit.serialNumber,
-            installationDate: solarUnit.installationDate,
+            installationDate: solarUnit.installationDate?.slice(0, 10),
             capacity: solarUnit.capacity,
             status: solarUnit.status,
             userId: solarUnit.userId,
@@ -38,6 +38,7 @@ export function EditSolarUnitForm({ solarUnit }) {
     })
 
     const { id } = useParams();
+    const navigate = useNavigate();
 
     const [editSolarUnit, { isLoading: isEditingSolarUnit }] = useEditSolarUnitMutation();
 
@@ -49,6 +50,8 @@ export function EditSolarUnitForm({ solarUnit }) {
     async function onSubmit(values) {
         try {
             await editSolarUnit({ id, data: values }).unwrap();
+            alert("Solar unit updated successfully.");
+            navigate("/admin/solar-units");
         } catch (error) {
             console.error(error);
         }
@@ -77,7 +80,12 @@ export function EditSolarUnitForm({ solarUnit }) {
                         <FormItem>
                             <FormLabel>Installation Date</FormLabel>
                             <FormControl>
-                                <Input placeholder="Installation Date" {...field} />
+                                <Input
+                                  type="date"
+                                  placeholder="Installation Date"
+                                  {...field}
+                                  value={field.value ?? ""}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>

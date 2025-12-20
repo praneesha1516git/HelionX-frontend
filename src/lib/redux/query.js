@@ -5,45 +5,47 @@ const baseUrl =  import.meta.env.VITE_BACKEND_URL + "/api";
 // Define a service using a base URL and expected endpoints
 
 export const api = createApi({
+
   reducerPath: "api",
+
   baseQuery: fetchBaseQuery({ baseUrl: baseUrl  , prepareHeaders: async (headers) => {
     //window.clerk means accessing the Clerk instance from the global window object
- 
+    
     const clerk = window.Clerk;
     if (clerk) {
       console.log("Clerk instance found.");
-       const token = await clerk.session.getToken();
-
-       if(token) {
-        // Set the Authorization header with the Clerk token
-         headers.set("Authorization", `Bearer ${token}`);
-         console.log("Authorization header set in query.js");
-       }
-    }
-
+      const token = await clerk.session.getToken();
+      
+      if(token) {
+        // Set the Authorization header with the Clerk token 
+        headers.set("Authorization", `Bearer ${token}`);
+        console.log("Authorization header set in query.js");
+      }  
+    }   
+    
     return headers;
-}}),
+  }}),    
 
 
   endpoints: (build) => ({
     getEnergyGenerationRecordsBySolarUnit: build.query({
       query: ({id, groupBy , limit}) => `/energy-generation-records/solar-unit/${id}?groupBy=${groupBy}&limit=${limit}`,
-    }),
+    }),  
     
     // New endpoint to get solar unit by Clerk user ID
    getSolarUnitForUser : build.query ({
       query : () => `/solar-units/me`,
-   }),
+   }),   
  
    // New endpoint to get all solar units
    getSolarUnits : build.query ({
-    query : () => `/solar-units`,
-  }),
+    query : () => `/solar-units`, 
+  }),  
 
   //endpoint to get solar unit by ID
   getSolarUnitById : build.query ({
     query : (id) => `/solar-units/${id}`,
-  }),
+  }),  
 
 
   createSolarUnit : build.mutation ({
@@ -51,26 +53,91 @@ export const api = createApi({
       url: '/solar-units',
       method: 'POST',
       body: data,
-    })
-  }),
+    })  
+  }),  
 
   editSolarUnit : build.mutation ({
     query : ({id , data}) => ({
       url: `/solar-units/${id}`,
       method: 'PUT',
       body: data,
-    })
-  }),
+    })  
+  }),  
 
     getAllUsers : build.query ({
       query : () => `/users`,
+    }),  
+ 
+  
+
+  getWeatherData : build.query ({
+    query : () => `/weather-data`,
+  }),
+
+  getCapacityFactorData : build.query ({
+     query: ({id , groupBy , limit}) => `/capacity-factor/solar-unit/${id}?groupBy=${groupBy}&limit=${limit}`,
+  }),
+
+
+  getInvoicesforUser : build.query ({
+    query : () => `/invoices`,
+  }),
+
+  getInvoiceByInvoiceId : build.query ({
+    query : ({invoiceId}) => `/invoices/${invoiceId}`,
+  }),
+
+
+  getAllInvoices : build.query ({
+    query : () => `/admin/invoices`,
+  }),
+
+ 
+  getSessionStatus : build.query ({
+    query : (sessionId) => `/payments/session-status?session_id=${sessionId}`,
+  }),
+
+  createCheckoutSession : build.mutation ({
+    query : (invoiceId) => ({
+      url: `/payments/create-checkout-session`,
+      method: 'POST',
+      body: { invoiceId },
+    })
+  }),
+
+   getUserAnomalies : build.query ({
+    query : () => `/anomalies`,
+
+   }),
+
+
+    getAllAnomalies : build.query ({
+    query : () => `/admin/anomalies`,
+
+   }),
+
+    getAnomalyTrends : build.query ({
+      query : ({ groupBy = "daily", limit, solarUnitId }) => {
+        const params = new URLSearchParams({ groupBy });
+        if (limit) params.append("limit", limit);
+        if (solarUnitId) params.append("solarUnitId", solarUnitId);
+        return `/anomalies/trends?${params.toString()}`;
+      },
     }),
+
+    getAdminAnomalyTrends : build.query ({
+      query : ({ groupBy = "daily", limit, solarUnitId }) => {
+        const params = new URLSearchParams({ groupBy });
+        if (limit) params.append("limit", limit);
+        if (solarUnitId) params.append("solarUnitId", solarUnitId);
+        return `/anomalies/admin/trends?${params.toString()}`;
+      },
+    }),
+
+
 
   }),
 });
-
-
-
 
 
 
@@ -83,5 +150,16 @@ export const {
    useGetSolarUnitByIdQuery,
    useCreateSolarUnitMutation,
    useEditSolarUnitMutation,
-    useGetAllUsersQuery,
+   useGetAllUsersQuery,
+   useGetWeatherDataQuery,
+   useGetCapacityFactorDataQuery,
+   useGetInvoicesforUserQuery,
+   useGetInvoiceByInvoiceIdQuery,
+   useGetAllInvoicesQuery,
+   useGetSessionStatusQuery,
+   useCreateCheckoutSessionMutation,
+    useGetUserAnomaliesQuery,
+    useGetAllAnomaliesQuery,
+    useGetAnomalyTrendsQuery,
+    useGetAdminAnomalyTrendsQuery,
    } = api;

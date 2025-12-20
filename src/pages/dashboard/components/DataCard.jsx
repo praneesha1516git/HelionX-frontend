@@ -39,12 +39,12 @@ const DataCard = ({ solarUnitId, title }) => {
     if(isLoading) {
       return <Skeleton className="w-full h-48 rounded-md"/>;
     }
-
+    
     if(!data || isError) {
       return <div>Error: {error.message}</div>;
     }
- 
-    console.log("Original Data:", data);
+    
+
 
     const last7Days = data;
 
@@ -83,7 +83,7 @@ const DataCard = ({ solarUnitId, title }) => {
 
 
   return (
-   <Card className="rounded-md p-6">
+   <Card className="rounded-md p-6 bg-white/15 border border-white/30 backdrop-blur-lg shadow-xl">
       <div className="flex justify-between items-start mb-4">
         <div>
           <h2 className="text-2xl font-bold text-foreground mb-2">
