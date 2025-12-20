@@ -1,6 +1,6 @@
 import React from "react";
 import { Zap, Check } from "lucide-react";
-import solarImg from "./panel1.jpg";
+import solarImg from "./sp.jpeg";
 
 export default function SunrockLanding() {
   return (
