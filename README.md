@@ -1,12 +1,89 @@
+#Backend github link - https://github.com/praneesha1516git/HelionX-backend
+#data-api github link - https://github.com/praneesha1516git/HelionX-data-api
+#Identified Anomalies and their detection method , severity classificatin and User Impact
+
+1. Sudden Energy Spike
+
+Anomaly Type: Point Anomaly
+
+Detection Method:
+Sudden energy spikes are detected using statistical thresholding with the Interquartile Range (IQR).
+The IQR is calculated only using daylight data between 06:00 and 18:00 to avoid distortion from night-time zero values.
+If the energy generated in any 2-hour interval exceeds Q3 + 1.5 × IQR, it is flagged as a spike.
+
+Severity Level: Warning
+
+User Impact & Action:
+This anomaly usually indicates a sensor malfunction or corrupted data.
+The user should verify sensor calibration and inspect the data collection pipeline to prevent inaccurate reporting.
+
+2. Sudden Energy Drop
+
+Anomaly Type: Point Anomaly
+
+Detection Method:
+If energy generation is zero during daylight hours (06:00–18:00), the system flags a sudden drop anomaly.
+This rule-based approach ensures that expected solar production is not incorrectly recorded as zero.
+
+Severity Level: Critical
+
+User Impact & Action:
+This may indicate inverter failure, panel disconnection, or severe shading.
+Immediate inspection and corrective action are required to restore energy production.
+
+3. Night-Time Energy Generation
+
+Anomaly Type: Contextual Anomaly
+
+Detection Method:
+If energy generation is recorded after 18:00 or before 06:00, the system flags it as a contextual anomaly, since solar panels should not produce power at night.
+
+Severity Level: Info
+
+User Impact & Action:
+This suggests incorrect timestamps or faulty sensors.
+The user should verify time synchronization and sensor configuration.
+
+4. Flat-Line Pattern
+
+Anomaly Type: Collective Anomaly
+
+Detection Method:
+A variance analysis is performed across all 2-hour intervals of a day.
+If the variance is near zero, it indicates that energy values are unnaturally constant, triggering a flat-line anomaly.
+
+Severity Level: Critical
+
+User Impact & Action:
+This typically indicates a frozen sensor or backend aggregation failure.
+The user should restart the sensor and verify the data ingestion service.
 
 
-Solar Energy Generation Anomalies – Detection, Severity & User Impact
-Anomaly Type	Anomaly Name	Detection Method	Severity Level	User Impact & Recommended Action
-Point Anomaly	Sudden Energy Spike	Statistical thresholding using daily Interquartile Range (IQR) calculated only on daylight intervals (06:00–18:00). A value above Q3 + 1.5 × IQR is flagged.	Warning	Indicates possible sensor malfunction or data corruption. User should verify sensor calibration and inspect data pipeline for errors.
-Point Anomaly	Sudden Energy Drop	Rule-based check: if energy generation is zero during daylight hours, it is flagged as an anomaly.	Critical	Suggests inverter failure, panel disconnection, or heavy shading. User should immediately inspect the solar unit and restore operation.
-Contextual Anomaly	Night-Time Energy Generation	Time-based validation: if energy is recorded after 18:00 or before 06:00, it is flagged.	Info	Indicates incorrect timestamping or faulty sensors. User should check system clock synchronization and sensor configuration.
-Collective Anomaly	Flat-Line Pattern	Variance analysis across daily 2-hour intervals. Near-zero variance indicates abnormal constant readings.	Critical	Suggests frozen sensor or backend aggregation failure. User should restart sensors and verify data ingestion services.
-Collective Anomaly	Missing Noon Peak	Peak detection by comparing the current day’s maximum energy against historical midday peak averages. If current peak < 50% of historical average, anomaly is flagged.	Warning	Indicates reduced panel efficiency due to dirt, shading, or weather issues. User should inspect panels and consider maintenance.
-Collective Anomaly	Gradual Performance Degradation	Trend analysis using rolling averages and linear regression slope over a defined time window (e.g., 7 days). A consistently negative slope indicates degradation.	Warning	Indicates long-term efficiency loss due to aging or dust buildup. User should schedule preventive maintenance or cleaning.
-Data Quality Anomaly	Missing Interval Records	Interval count validation: expected 12 records per day (2-hour intervals). Missing records trigger anomaly.	Warning	Leads to incomplete analysis and inaccurate reports. User should check network connectivity and data ingestion reliability.
-Data Quality Anomaly	Duplicate Interval Records	Database-level uniqueness constraints on (solarUnitId, timestamp) and duplicate timestamp checks.	Info	Can cause incorrect aggregation results. User should resolve data duplication and enforce database constraints.
+5. Gradual Performance Degradation
+
+Anomaly Type: Collective Anomaly
+
+Detection Method:
+A trend analysis is performed using rolling averages and linear regression slope detection over a fixed time window (e.g., 7 days).
+A consistently negative slope indicates gradual degradation.
+
+Severity Level: Warning
+
+User Impact & Action:
+This indicates long-term efficiency loss caused by aging panels or dirt buildup.
+Preventive maintenance or cleaning should be scheduled.
+
+6. Missing Interval Records
+
+Anomaly Type: Data Quality Anomaly
+
+Detection Method:
+Each day is expected to have 12 records (2-hour intervals).
+If the actual record count is less than 12, a missing interval anomaly is triggered.
+
+Severity Level: Warning
+
+User Impact & Action:
+Missing data leads to incomplete analysis and inaccurate reports.
+The user should check network connectivity and data ingestion reliability.
+
