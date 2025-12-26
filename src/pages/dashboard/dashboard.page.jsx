@@ -39,7 +39,7 @@ const DashboardPage = () => {
       "unknown";
     const data = errorSolarUnit?.data || errorSolarUnit?.error || null;
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-200 p-8">
+      <div className="min-h-screen flex items-center justify-center bg-yellow-200 p-8">
         <div className="bg-white/80 backdrop-blur-xl rounded-2xl p-6 border border-gray-300 max-w-2xl">
           <div className="text-gray-800 text-xl mb-4">
             Error loading solar unit (status: {String(status)})

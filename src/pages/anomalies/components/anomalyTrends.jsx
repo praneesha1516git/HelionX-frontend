@@ -46,6 +46,30 @@ const buildLabel = (item, range) => {
 
 const defaultLimit = { daily: 30, weekly: 26, monthly: 12 };
 
+const LoadingPlaceholder = () => (
+  <div className="h-full flex flex-col gap-4" aria-hidden>
+    <div className="flex items-center justify-between">
+      <div className="flex items-center gap-2">
+        <div className="h-5 w-5 rounded bg-gray-200 animate-pulse" />
+        <div className="h-4 w-28 rounded bg-gray-200 animate-pulse" />
+      </div>
+      <div className="h-10 w-36 rounded bg-gray-200 animate-pulse" />
+    </div>
+    <div className="relative flex-1 rounded-xl bg-gradient-to-b from-gray-200/70 to-gray-100/40 overflow-hidden">
+      <div className="absolute inset-0 animate-pulse bg-[radial-gradient(circle_at_16px_16px,rgba(255,255,255,0.5),transparent_35%)]" />
+      <div className="absolute inset-x-6 bottom-6 top-12 flex items-end gap-3">
+        {Array.from({ length: 12 }).map((_, idx) => (
+          <div
+            key={idx}
+            className="flex-1 rounded-t-md bg-gray-300/80 animate-pulse"
+            style={{ height: `${30 + ((idx * 7) % 45)}%` }}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
 export default function AnomalyTrends({ admin = false, solarUnitId }) {
   const [range, setRange] = useState("daily");
   const limit = defaultLimit[range];
@@ -59,9 +83,11 @@ export default function AnomalyTrends({ admin = false, solarUnitId }) {
     [range, limit, solarUnitId]
   );
 
-  const { data, isLoading, isError } = admin
+  const { data, isLoading, isFetching, isError } = admin
     ? useGetAdminAnomalyTrendsQuery(queryArgs)
     : useGetAnomalyTrendsQuery(queryArgs);
+
+  const isPending = (isLoading || isFetching) && (!data || data.length === 0);
 
   const chartData = useMemo(() => {
     if (!data || !Array.isArray(data)) return [];
@@ -93,10 +119,8 @@ export default function AnomalyTrends({ admin = false, solarUnitId }) {
         </div>
       </CardHeader>
       <CardContent className="h-72">
-        {isLoading ? (
-          <div className="h-full flex items-center justify-center text-sm text-gray-600">
-            Loading anomaly trends...
-          </div>
+        {isPending ? (
+          <LoadingPlaceholder />
         ) : isError ? (
           <div className="h-full flex items-center justify-center text-sm text-red-600">
             Unable to load trends
