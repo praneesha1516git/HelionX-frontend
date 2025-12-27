@@ -35,10 +35,7 @@ export function AdminAnomalyList() {
     });
   }, [anomalies, severityFilter]);
 
-  useEffect(() => {
-    setPage(1);
-  }, [severityFilter]);
-
+ 
   const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
   const currentPage = Math.min(page, totalPages);
   const start = (currentPage - 1) * pageSize;
@@ -47,7 +44,7 @@ export function AdminAnomalyList() {
 
   if (isLoading) {
     return (
-      <Card className="w-full bg-white/40 backdrop-blur-xl border border-white/20 shadow-2xl">
+      <Card className="w-full bg-white/80 backdrop-blur-xl border border-white/20 shadow-2xl">
         <CardContent className="p-6 text-center text-sm text-gray-600">Loading anomalies...</CardContent>
       </Card>
     );
@@ -55,7 +52,7 @@ export function AdminAnomalyList() {
 
   if (isError || !anomalies) {
     return (
-      <Card className="w-full bg-white/40 backdrop-blur-xl border border-white/20 shadow-2xl">
+      <Card className="w-full bg-white/80 backdrop-blur-xl border border-white/20 shadow-2xl">
         <CardContent className="p-6 text-sm text-red-600">
           Failed to load anomalies {error?.status ? `(status: ${error.status})` : ""}.
         </CardContent>
@@ -64,7 +61,7 @@ export function AdminAnomalyList() {
   }
 
   return (
-    <Card className="w-full bg-white/40 backdrop-blur-xl border border-white/20 shadow-2xl">
+    <Card className="w-full bg-white/80 backdrop-blur-xl border border-white/20 shadow-2xl">
       <CardHeader className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <CardTitle className="text-gray-900">Anomalies</CardTitle>
         <div className="flex items-center gap-3">

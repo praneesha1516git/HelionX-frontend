@@ -76,7 +76,7 @@ export function SolarUnitsTab() {
   }
 
   return (
-    <Card className="w-full bg-white/40 backdrop-blur-xl border border-white/20 shadow-2xl">
+    <Card className="w-full bg-white/80 backdrop-blur-xl border border-white/20 shadow-2xl">
       <CardHeader className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <CardTitle className="text-gray-900">Solar Units</CardTitle>
         <div className="flex flex-wrap items-center gap-3">

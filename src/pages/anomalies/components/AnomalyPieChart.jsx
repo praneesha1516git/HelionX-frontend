@@ -1,7 +1,7 @@
 "use client"
 import { Pie, PieChart } from "recharts"
 import { useGetUserAnomaliesQuery } from "@/lib/redux/query"
-
+import { Skeleton } from "@/components/ui/skeleton"
 import {
   Card,
   CardContent,
@@ -33,8 +33,24 @@ export function AnomalyPieChart({ solarUnitId }) {
     id: solarUnitId,
   });
 
-  if (isLoading) return null;
-  if (isError || !anomalies) return null;
+  if (isLoading) {
+    return (
+      <Card className="flex flex-col bg-white/80 backdrop-blur-xl border border-white/80 shadow-2xl">
+        <CardContent className="p-6 text-center text-sm text-gray-600">Loading anomalies...</CardContent>
+      </Card>
+    );
+  }
+
+  if (isError || !anomalies) {
+    return (
+      <Card className="flex flex-col bg-white/40 backdrop-blur-xl border border-white/20 shadow-2xl">
+        <CardContent className="p-6 text-sm text-red-600">
+          Failed to load anomalies {error?.status ? `(status: ${error.status})` : ""}.
+        </CardContent>
+      </Card>
+    );
+  }
+
 
   const oneMonthAgo = new Date();
   oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
@@ -85,7 +101,9 @@ export function AnomalyPieChart({ solarUnitId }) {
   };
 
   return (
-    <Card className="flex flex-col bg-white/40 backdrop-blur-xl border border-white/20 shadow-2xl">
+    
+    <Card className="flex flex-col bg-white/80 backdrop-blur-xl border border-white/20 shadow-2xl">
+      
       <CardHeader className="items-center pb-0">
         <CardTitle className="text-gray-900">Anomalies (last 30 days)</CardTitle>
         <CardDescription className="text-gray-600">Distribution by anomaly type</CardDescription>
@@ -93,9 +111,9 @@ export function AnomalyPieChart({ solarUnitId }) {
       <CardContent className="flex-1 pb-0">
         <ChartContainer
           config={chartConfig}
-          className="[&_.recharts-pie-label-text]:fill-foreground mx-auto aspect-square max-h-[250px] pb-0"
+          className="[&_.recharts-pie-label-text]:fill-foreground mx-auto  max-h-[250px] pb-0"
         >
-          <PieChart margin={{ top: 8, bottom: 8, left: 24, right: 24 }}>
+          <PieChart margin={{ top: 8, bottom: 8, left: 8, right: 8 }}>
             <ChartTooltip content={<ChartTooltipContent hideLabel />} />
             <Pie
               data={chartData}

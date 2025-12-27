@@ -3,7 +3,7 @@ import DataChart from "./components/DataChart";
 import { CFBarChart } from "./components/CFBarChart";
 import { WeatherCard } from "./components/WeatherCard";
 import { useUser } from "@clerk/clerk-react";
-import house from "./components/house12.png";
+import house from "./components/house16.png";
 import { Sun, Moon, Zap, Activity, Download, Settings, CloudSun, Wind, Droplets } from 'lucide-react';
 import { useState } from 'react';
 
@@ -25,7 +25,7 @@ const DashboardPage = () => {
 
   if (isLoadingSolarUnit) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-200">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-gray-800 text-xl">Loading...</div>
       </div>
     );
@@ -39,7 +39,7 @@ const DashboardPage = () => {
       "unknown";
     const data = errorSolarUnit?.data || errorSolarUnit?.error || null;
     return (
-      <div className="min-h-screen flex items-center justify-center bg-yellow-200 p-8">
+      <div className="min-h-screen flex items-center justify-center bg-gray-200 p-8">
         <div className="bg-white/80 backdrop-blur-xl rounded-2xl p-6 border border-gray-300 max-w-2xl">
           <div className="text-gray-800 text-xl mb-4">
             Error loading solar unit (status: {String(status)})
@@ -56,9 +56,9 @@ const DashboardPage = () => {
   console.log("Solar Unit ID in DashboardPage:", solarUnit.serialNumber);
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gray-200">
+    <div className="min-h-screen relative overflow-hidden ">
       {/* Background Image */}
-      <div className="absolute inset-0 z-0 flex items-start justify-center pt-0">
+      <div className="absolute inset-0 z-0 flex items-start justify-center pt-0 ">
         <img
           src={house}
           alt="Solar house background"
@@ -126,7 +126,7 @@ const DashboardPage = () => {
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid grid-cols-2 gap-6 mt-110 max-w-7xl mx-auto">
+        <div className="grid grid-cols-2 gap-6 mt-[45%] max-w-7xl mx-auto">
           {/* Energy Production Chart */}
           <div className="">
             <DataChart solarUnitId={solarUnit._id} />

@@ -31,6 +31,7 @@ import {
   useGetAdminAnomalyTrendsQuery,
 } from "@/lib/redux/query";
 
+
 const buildLabel = (item, range) => {
   if (!item?._id) return "—";
   if (range === "daily") {
@@ -98,7 +99,7 @@ export default function AnomalyTrends({ admin = false, solarUnitId }) {
   }, [data, range]);
 
   return (
-    <Card className="w-full bg-white/40 backdrop-blur-xl border border-white/20 shadow-2xl">
+    <Card className="w-full bg-white/80 backdrop-blur-xl border border-white/20 shadow-2xl">
       <CardHeader className="flex items-center justify-between gap-3">
         <div>
           <CardTitle className="text-gray-900">Anomaly Trends</CardTitle>
@@ -139,7 +140,7 @@ export default function AnomalyTrends({ admin = false, solarUnitId }) {
               <Line
                 type="monotone"
                 dataKey="count"
-                stroke="#2563eb"
+                stroke="#41b0b2ff"
                 strokeWidth={2}
                 dot={{ r: 3 }}
                 activeDot={{ r: 7 }}

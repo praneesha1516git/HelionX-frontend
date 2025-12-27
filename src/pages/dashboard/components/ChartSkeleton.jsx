@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 // Skeleton placeholder to preserve chart layout while data loads
 const ChartSkeleton = ({ title, description, controls }) => {
   return (
-    <Card className="w-full h-120 rounded-xl bg-white/40 backdrop-blur-xl border border-white/20 shadow-2xl">
+    <Card className="w-full h-120 rounded-xl bg-white/80 backdrop-blur-xl border border-white/20 shadow-2xl">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-gray-500">
           <div className="h-5 w-5 rounded bg-gray-200 animate-pulse" />

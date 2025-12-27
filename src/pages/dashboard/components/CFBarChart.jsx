@@ -84,7 +84,7 @@ export const CFBarChart = ({solarUnitId}) => {
 console.log("Capacity Factor Data:", lastSelectedRangeDaysCapacityFactor);
 
   return (
-    <Card className="w-full h-120 rounded-xl bg-white/40 backdrop-blur-xl rounded-2xl border border-white/20 shadow-2xl">
+    <Card className="w-full h-[50vh] rounded-xl bg-white/80 backdrop-blur-xl rounded-2xl border border-white/20 shadow-2xl">
       <CardHeader>
         <CardTitle>Capacity Factor</CardTitle>
         <CardDescription>Monitor your solar panel's efficiency</CardDescription>
@@ -140,12 +140,12 @@ console.log("Capacity Factor Data:", lastSelectedRangeDaysCapacityFactor);
           </BarChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col items-start gap-2 text-sm">
+      {/* <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex gap-2 leading-none font-sm text-gray-500">
         Capacity Factor Shows the Solar Panel's Efficiency <TrendingUp className="h-4 w-4" />
         </div>
         
-      </CardFooter>
+      </CardFooter> */}
     </Card>
   )
 }

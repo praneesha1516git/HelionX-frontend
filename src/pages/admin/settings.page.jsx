@@ -3,7 +3,7 @@ import {SettingsTab} from "../admin/components/SettingsTab.jsx";
 
 export default function AdminPage()  {
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gray-200">
+    <div className="min-h-screen relative overflow-hidden">
       {/* soft background accents */}
       
       <main className="relative z-10 max-w-6xl mx-auto px-4 py-10 space-y-2">

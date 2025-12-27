@@ -1,8 +1,153 @@
 "use client";
 
-import AnomalyTrends from "@/pages/anomalies/components/anomalyTrends";
+import { useMemo, useState } from "react";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
+import { format, parseISO } from "date-fns";
+import { TrendingUp } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  useGetAdminAnomalyTrendsQuery,
+} from "@/lib/redux/query";
 
-// Admin wrapper to render trends for all anomalies
-export default function AdminAnomalyTrends({ solarUnitId }) {
-  return <AnomalyTrends admin />;
+
+
+const buildLabel = (item, range) => {
+  if (!item?._id) return "—";
+  if (range === "daily") {
+    const parsed = parseISO(item._id.date || "");
+    return isNaN(parsed) ? "—" : format(parsed, "MMM d");
+  }
+  if (range === "weekly") {
+    return item._id.week ? `W${item._id.week}` : "—";
+  }
+  const parsed = parseISO((item._id.month || "") + "-01");
+  return isNaN(parsed) ? "—" : format(parsed, "MMM yyyy");
+};
+
+const defaultLimit = { daily: 30, weekly: 26, monthly: 12 };
+
+const LoadingPlaceholder = () => (
+  <div className="h-full flex flex-col gap-4" aria-hidden>
+    <div className="flex items-center justify-between">
+      <div className="flex items-center gap-2">
+        <div className="h-5 w-5 rounded bg-gray-200 animate-pulse" />
+        <div className="h-4 w-28 rounded bg-gray-200 animate-pulse" />
+      </div>
+      <div className="h-10 w-36 rounded bg-gray-200 animate-pulse" />
+    </div>
+    <div className="relative flex-1 rounded-xl bg-gradient-to-b from-gray-200/70 to-gray-100/40 overflow-hidden">
+      <div className="absolute inset-0 animate-pulse bg-[radial-gradient(circle_at_16px_16px,rgba(255,255,255,0.5),transparent_35%)]" />
+      <div className="absolute inset-x-6 bottom-6 top-12 flex items-end gap-3">
+        {Array.from({ length: 12 }).map((_, idx) => (
+          <div
+            key={idx}
+            className="flex-1 rounded-t-md bg-gray-300/80 animate-pulse"
+            style={{ height: `${30 + ((idx * 7) % 45)}%` }}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
+export default function AdminAnomalyTrends({ admin = true, solarUnitId }) {
+
+  const [range, setRange] = useState("daily");
+  const limit = defaultLimit[range];
+
+  const queryArgs = useMemo(
+    () => ({
+      groupBy: range,
+      limit,
+      ...(solarUnitId ? { solarUnitId } : {}),
+    }),
+    [range, limit, solarUnitId]
+  );
+
+  const { data, isLoading, isFetching, isError } = admin ? useGetAdminAnomalyTrendsQuery(queryArgs) : {};
+console.log("AdminAnomalyTrends data:", data);
+  const isPending = (isLoading || isFetching) && (!data || data.length === 0);
+
+  const chartData = useMemo(() => {
+    if (!data || !Array.isArray(data)) return [];
+    return data.map((item) => ({
+      label: buildLabel(item, range),
+      count: item.count ?? 0,
+    }));
+  }, [data, range]);
+console.log("Chart Data:", chartData);
+  return (
+    <Card className="w-full bg-white/80 backdrop-blur-xl border border-white/20 shadow-2xl">
+      <CardHeader className="flex items-center justify-between gap-3">
+        <div>
+          <CardTitle className="text-gray-900">Anomaly Trends</CardTitle>
+          <CardDescription>Counts of anomalies over time</CardDescription>
+        </div>
+        <div className="flex items-center gap-2">
+          <TrendingUp className="w-5 h-5 text-gray-500" />
+          <Select value={range} onValueChange={setRange}>
+            <SelectTrigger className="w-[150px] border border-white/20">
+              <SelectValue placeholder="Daily" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="daily">Daily</SelectItem>
+              <SelectItem value="weekly">Weekly</SelectItem>
+              <SelectItem value="monthly">Monthly</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+      </CardHeader>
+      <CardContent className="h-72">
+        {isPending ? (
+          <LoadingPlaceholder />
+        ) : isError ? (
+          <div className="h-full flex items-center justify-center text-sm text-red-600">
+            Unable to load trends
+          </div>
+        ) : chartData.length === 0 ? (
+          <div className="h-full flex items-center justify-center text-sm text-gray-600">
+            No anomaly data found for this range
+          </div>
+        ) : (
+          <ResponsiveContainer>
+            <LineChart data={chartData} margin={{ top: 8, right: 24, left: 0, bottom: 12 }}>
+              <CartesianGrid strokeDasharray="3 3" vertical={false} />
+              <XAxis dataKey="label" tickMargin={8} />
+              <YAxis allowDecimals={false} tickMargin={8} />
+              <Tooltip />
+              <Line
+                type="monotone"
+                dataKey="count"
+                stroke="#41b0b2ff"
+                strokeWidth={2}
+                dot={{ r: 3 }}
+                activeDot={{ r: 7 }}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        )}
+      </CardContent>
+    </Card>
+  );
 }

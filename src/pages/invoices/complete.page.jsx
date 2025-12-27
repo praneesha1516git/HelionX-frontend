@@ -18,7 +18,7 @@ export default function PaymentCompletePage() {
   const isFailed = data && data.paymentStatus && data.paymentStatus !== "paid";
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-gray-200 to-gray-100">
+    <div className="min-h-screen relative overflow-hidden ">
       <div className="absolute inset-0 z-0">
         <div className="absolute -top-32 -left-24 h-72 w-72 rounded-full bg-blue-300/25 blur-3xl" />
         <div className="absolute top-10 right-0 h-64 w-64 rounded-full bg-amber-200/25 blur-3xl" />

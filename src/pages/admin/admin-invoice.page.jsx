@@ -34,18 +34,15 @@ export default function InvoicesPage() {
 
   const { data: users , isError: isErrorUsers , isLoading: isLoadingUsers , error: errorUsers } = useGetAllUsersQuery();
   
-  useEffect(() => {
-    setPage(1);
-  }, [statusFilter, userFilter]);
+  // useEffect(() => {
+  //   setPage(1);
+  // }, [statusFilter, userFilter]);
   
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-200">
-        <div className="text-center bg-white/40 backdrop-blur-xl border border-white/20 shadow-2xl px-6 py-4 rounded-2xl">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
           <p className="text-gray-700 font-medium">Loading invoices...</p>
-        </div>
-      </div>
+    
+   
     );
   }
 
@@ -54,12 +51,12 @@ export default function InvoicesPage() {
     const status = error?.status || error?.originalStatus || "unknown";
     const data = error?.data || error?.error || null;
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-200 p-6">
-        <div className="bg-white/40 backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl p-8 max-w-2xl w-full">
+      <div className="min-h-screen flex items-center justify-center  p-6">
+        <div className="bg-white/80 backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl p-8 max-w-2xl w-full">
           <div className="text-red-600 text-lg font-semibold mb-4">
             Error loading invoices (status: {String(status)})
           </div>
-          <pre className="bg-white/50 p-4 rounded-lg text-sm text-gray-700 overflow-auto border border-white/20">
+          <pre className="bg-white/80 p-4 rounded-lg text-sm text-gray-700 overflow-auto border border-white/20">
             {JSON.stringify(data, null, 2)}
           </pre>
         </div>
@@ -91,9 +88,8 @@ export default function InvoicesPage() {
   const pagedInvoices = filteredByUser?.slice(start, end) || [];
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gray-200">
+    <div className="min-h-screen relative overflow-hidden ">
 
-   
 
       <main className="relative z-10 max-w-6xl mx-auto px-4 py-10">
         {/* Header */}
@@ -110,7 +106,7 @@ export default function InvoicesPage() {
 
           {/* Stats Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-            <Card className="border border-white/20 bg-white/40 backdrop-blur-xl shadow-2xl">
+            <Card className="border border-white/20 bg-white/80 backdrop-blur-xl shadow-2xl">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
@@ -126,7 +122,7 @@ export default function InvoicesPage() {
               </CardContent>
             </Card>
 
-            <Card className="border border-white/20 bg-white/40 backdrop-blur-xl shadow-2xl">
+            <Card className="border border-white/20 bg-white/80 backdrop-blur-xl shadow-2xl">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
@@ -142,7 +138,7 @@ export default function InvoicesPage() {
               </CardContent>
             </Card>
 
-            <Card className="border border-white/20 bg-white/40 backdrop-blur-xl shadow-2xl">
+            <Card className="border border-white/20 bg-white/80 backdrop-blur-xl shadow-2xl">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
@@ -160,7 +156,7 @@ export default function InvoicesPage() {
           </div>
 
           {/* Filter */}
-          <div className="flex flex-wrap items-center gap-3 bg-white/40 backdrop-blur-xl p-4 rounded-xl shadow-2xl border border-white/20">
+          <div className="flex flex-wrap items-center gap-3 bg-white/80 backdrop-blur-xl p-4 rounded-xl shadow-2xl border border-white/20">
             <Filter className="w-5 h-5 text-gray-600" />
             <span className="text-sm font-medium text-gray-700">Filter Invoices:</span>
             <Select value={statusFilter} onValueChange={setStatusFilter}>
@@ -202,7 +198,7 @@ export default function InvoicesPage() {
 
         {/* Invoices List */}
         {!filteredByUser || filteredByUser.length === 0 ? (
-          <Card className="border border-white/20 bg-white/40 backdrop-blur-xl shadow-2xl">
+          <Card className="border border-white/20 bg-white/80 backdrop-blur-xl shadow-2xl">
             <CardContent className="p-12 text-center">
               <Receipt className="w-16 h-16 text-gray-300 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
@@ -216,7 +212,7 @@ export default function InvoicesPage() {
             </CardContent>
           </Card>
         ) : (
-          <Card className="border border-white/20 bg-white/40 backdrop-blur-xl shadow-2xl">
+          <Card className="border border-white/20 bg-white/80 backdrop-blur-xl shadow-2xl">
             <CardContent className="p-0">
               <div className="overflow-x-auto">
                 <table className="min-w-full text-sm">
@@ -260,7 +256,7 @@ export default function InvoicesPage() {
                              
                               <Button
                                 variant="outline"
-                                onClick={() => navigate(`/dashboard/invoices/${invoice._id}/payment`)}
+                                onClick={() => navigate(`/admin/invoices/${invoice._id}/payment`)}
                                 className="font-semibold"
                               >
                                 View

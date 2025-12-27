@@ -24,7 +24,7 @@ export function SettingsTab() {
   };
 
   return (
-    <Card className="p-6 bg-white/40 backdrop-blur-xl border border-white/20 shadow-2xl space-y-6">
+    <Card className="p-6 bg-white/80 backdrop-blur-xl border border-white/20 shadow-2xl space-y-6">
     
 
       {/* General Settings */}

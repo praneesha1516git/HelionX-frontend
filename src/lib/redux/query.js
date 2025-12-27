@@ -112,7 +112,7 @@ export const api = createApi({
 
 
     getAllAnomalies : build.query ({
-    query : () => `/admin/anomalies`,
+    query : () => `/anomalies/admin`,
 
    }),
 

@@ -49,7 +49,7 @@ const DataChart = ({solarUnitId}) => {
     };
 
 const ChartSkeleton = ({ title, description, children }) => (
-  <Card className="w-full h-120 rounded-xl bg-white/40 backdrop-blur-xl border border-white/20 shadow-2xl">
+  <Card className="w-full h-120 rounded-xl bg-white/80 backdrop-blur-xl border border-white/20 shadow-2xl">
     <CardHeader>
       <CardTitle className="flex items-center gap-2">
         <div className="h-5 w-5 rounded bg-gray-200 animate-pulse" />
@@ -129,7 +129,7 @@ console.log("chart data" , lastSelectedRangeDaysEnergyProduction);
 
 
   return (
-    <Card className="w-full h-120 rounded-xl bg-white/40 backdrop-blur-xl rounded-2xl border border-white/20 shadow-2xl">
+    <Card className="w-full h-[50vh] rounded-xl bg-white/80 backdrop-blur-xl rounded-2xl border border-white/20 shadow-2xl">
       <CardHeader>
         <CardTitle>Energy Production Chart</CardTitle>
         <CardDescription>

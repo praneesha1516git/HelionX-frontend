@@ -29,7 +29,7 @@ const AnomaliesPage = () => {
   console.log(solarUnit);
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gray-200">
+    <div className="min-h-screen relative overflow-hidden">
       {/* soft background accents */}
       {/* <div className="absolute inset-0 z-0">
         <div className="absolute -top-32 -left-24 h-72 w-72 rounded-full bg-blue-300/30 blur-3xl" />

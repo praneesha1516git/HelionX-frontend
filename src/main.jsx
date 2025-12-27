@@ -18,7 +18,8 @@ import InvoicesPage from "./pages/invoices/invoices.page.jsx";
 import PaymentCompletePage from "./pages/invoices/complete.page.jsx";
 import PaymentPage from "./pages/invoices/payment.page";
 import AdminInvoicesPage from "./pages/admin/admin-invoice.page";
-import AdminAnomaliesPahe from "./pages/admin/amin.anomalies.page.jsx";
+import AdminAnomaliesPage from "./pages/admin/admin.anomalies.page.jsx";
+import AdminPaymentInfoPage from "./pages/admin/components/AdminPaymentInfo.page"
 
 import RootLayout from "./layouts/root.layout.jsx";
 import MainLayout from "./layouts/main.layout";
@@ -65,8 +66,9 @@ createRoot(document.getElementById("root")).render(
                     <Route path="/admin/solar-units/:id" element={<SolarUnitDetailPage />} />
                     <Route path="/admin/solar-units/:id/edit" element={<SolarUnitEditPage />} /> 
                     <Route path="/admin/solar-units/create" element={<SolarUnitCreatePage />} />
-                    <Route path="/admin/anomalies" element={<AdminAnomaliesPahe />} />
+                    <Route path="/admin/anomalies" element={<AdminAnomaliesPage />} />
                     <Route path="/admin/invoices" element={<AdminInvoicesPage />} />
+                    <Route path="/admin/invoices/:invoiceId/payment" element={<AdminPaymentInfoPage />} />
                     <Route path="/admin/settings" element={<SettingsPage />} />
                   </Route>
               </Route>

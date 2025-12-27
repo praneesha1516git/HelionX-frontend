@@ -7,7 +7,7 @@ export default function AdminLayout() {
          <>
   <SidebarProvider>
     <AdminSidebar />
-    <main className="p-4 w-full min-h-screen bg-gray-200">
+    <main className="p-4 w-full min-h-screen bg-gradient-to-b from-[#f0f4f8] via-[#d9e8f5] to-[#e8f0f7]">
       <SidebarTrigger className="block mb-4" />
       <Outlet />
     </main>

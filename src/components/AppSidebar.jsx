@@ -54,7 +54,7 @@ export function AppSidebar() {
 
   return (
     <Sidebar >
-      <SidebarContent className="pt-8 bg-white/20 backdrop-blur-lg border-r border-white/30 shadow-lg">
+      <SidebarContent className="pt-8 bg-white/50 backdrop-blur-lg border-r border-white/30 shadow-lg">
         <SidebarGroup>
           <SidebarGroupLabel className="text-2xl font-bold text-foreground mb-4">
             <Link to="/" className="inline-flex items-center">

@@ -79,7 +79,7 @@ export default function InvoicesPage() {
   const pagedInvoices = filteredInvoices?.slice(start, end) || [];
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gray-200">
+    <div className="min-h-screen relative overflow-hidden ">
    
 
       <main className="relative z-10 max-w-6xl mx-auto px-4 py-10">
@@ -96,8 +96,8 @@ export default function InvoicesPage() {
           </div>
 
           {/* Stats Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-            <Card className="border border-white/20 bg-white/40 backdrop-blur-xl shadow-2xl">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 ">
+            <Card className="border border-white/20 bg-white/80 backdrop-blur-xl shadow-2xl">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
@@ -113,7 +113,7 @@ export default function InvoicesPage() {
               </CardContent>
             </Card>
 
-            <Card className="border border-white/20 bg-white/40 backdrop-blur-xl shadow-2xl">
+            <Card className="border border-white/20 bg-white/80 backdrop-blur-xl shadow-2xl">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
@@ -129,7 +129,7 @@ export default function InvoicesPage() {
               </CardContent>
             </Card>
 
-            <Card className="border border-white/20 bg-white/40 backdrop-blur-xl shadow-2xl">
+            <Card className="border border-white/20 bg-white/80 backdrop-blur-xl shadow-2xl">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
@@ -146,7 +146,7 @@ export default function InvoicesPage() {
             </Card>
           </div>
 
-          <Card className="border border-white/20 bg-white/40 backdrop-blur-xl shadow-2xl">
+          <Card className="border border-white/20 bg-white/80 backdrop-blur-xl shadow-2xl">
             <CardHeader className="pb-0">
               <div className="flex flex-wrap items-center gap-3">
                 <Filter className="w-5 h-5 text-gray-600" />

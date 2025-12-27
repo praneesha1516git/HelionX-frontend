@@ -7,7 +7,7 @@ return (
     <>
      <SidebarProvider>
       <AppSidebar />
-      <main className="w-full min-h-screen bg-gray-200 p-4">
+      <main className="w-full min-h-screen  p-4 bg-gradient-to-b from-[#f0f4f8] via-[#d9e8f5] to-[#e8f0f7]">
         <SidebarTrigger className="w-8 h-8 block mb-4" />
         <Outlet />
       </main>

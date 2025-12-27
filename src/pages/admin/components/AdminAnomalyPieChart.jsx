@@ -33,7 +33,7 @@ export function AdminAnomalyPieChart() {
 
   if (isLoading) {
     return (
-      <Card className="flex flex-col bg-white/40 backdrop-blur-xl border border-white/20 shadow-2xl">
+      <Card className="flex flex-col bg-white/80 backdrop-blur-xl border border-white/20 shadow-2xl">
         <CardContent className="p-6 text-center text-sm text-gray-600">Loading anomalies...</CardContent>
       </Card>
     );
@@ -41,7 +41,7 @@ export function AdminAnomalyPieChart() {
 
   if (isError || !anomalies) {
     return (
-      <Card className="flex flex-col bg-white/40 backdrop-blur-xl border border-white/20 shadow-2xl">
+      <Card className="flex flex-col bg-white/80 backdrop-blur-xl border border-white/20 shadow-2xl">
         <CardContent className="p-6 text-sm text-red-600">
           Failed to load anomalies {error?.status ? `(status: ${error.status})` : ""}.
         </CardContent>
@@ -98,7 +98,7 @@ export function AdminAnomalyPieChart() {
   };
 
   return (
-    <Card className="flex flex-col bg-white/40 backdrop-blur-xl border border-white/20 shadow-2xl">
+    <Card className="flex flex-col bg-white/80 backdrop-blur-xl border border-white/20 shadow-2xl">
       <CardHeader className="items-center pb-0">
         <CardTitle className="text-gray-900">Anomalies (last 30 days)</CardTitle>
         <CardDescription className="text-gray-600">Distribution by anomaly type</CardDescription>
@@ -106,9 +106,9 @@ export function AdminAnomalyPieChart() {
       <CardContent className="flex-1 pb-0">
         <ChartContainer
           config={chartConfig}
-          className="[&_.recharts-pie-label-text]:fill-foreground mx-auto aspect-square max-h-[250px] pb-0"
+          className="[&_.recharts-pie-label-text]:fill-foreground mx-auto  max-h-[250px] pb-0"
         >
-          <PieChart margin={{ top: 8, bottom: 8, left: 24, right: 24 }}>
+          <PieChart margin={{ top: 8, bottom: 8, left:48, right: 20 }}>
             <ChartTooltip content={<ChartTooltipContent hideLabel />} />
             <Pie
               data={chartData}
