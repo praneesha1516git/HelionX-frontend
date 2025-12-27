@@ -147,9 +147,9 @@ console.log("chart data" , lastSelectedRangeDaysEnergyProduction);
             <SelectValue placeholder="Theme" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="1">Per Day</SelectItem>
-            <SelectItem value="7">Per Week</SelectItem>
-            <SelectItem value="30">Per Month</SelectItem>
+          <SelectItem value="1">Daily</SelectItem>
+            <SelectItem value="7">Weekly</SelectItem>
+            <SelectItem value="30">Monthly</SelectItem>
         </SelectContent>
         </Select>
        </div>

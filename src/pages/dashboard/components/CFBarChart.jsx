@@ -99,8 +99,9 @@ console.log("Capacity Factor Data:", lastSelectedRangeDaysCapacityFactor);
             <SelectValue placeholder="" />
         </SelectTrigger>
         <SelectContent>
-            <SelectItem value="7">Per Week</SelectItem>
-            <SelectItem value="30">Per Month</SelectItem>
+          
+            <SelectItem value="7">Weekly</SelectItem>
+            <SelectItem value="30">Monthly</SelectItem>
         </SelectContent>
         </Select>
        </div>
