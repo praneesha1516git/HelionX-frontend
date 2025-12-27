@@ -1,5 +1,5 @@
 import wind from "./wind-turbine-3.png";
-import Construction   from  "./solar-construction.webp";
+
 import { ChevronRight , TriangleAlert } from "lucide-react";
 
 

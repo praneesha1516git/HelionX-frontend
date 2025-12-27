@@ -1,5 +1,5 @@
 import panel from "./sp.jpeg";
-import Construction   from  "./solar-construction.webp";
+
 import { ChevronRight ,Zap } from "lucide-react";
 
 

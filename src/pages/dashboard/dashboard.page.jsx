@@ -23,6 +23,8 @@ const DashboardPage = () => {
     ? rawSolarUnitData[0]
     : rawSolarUnitData;
 
+  const isActive = (solarUnit?.status || "").toUpperCase() === "ACTIVE";
+
   if (isLoadingSolarUnit) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -70,18 +72,28 @@ const DashboardPage = () => {
       {/* Content */}
       <div className="relative z-10 min-h-screen p-6">
         {/* Top Bar with Weather */}
-        <div className="flex items-center justify-between mb-6">
-          {/* User Info */}
-          <div className="flex items-center gap-3 bg-white/80 backdrop-blur-xl rounded-2xl px-5 py-3 border border-gray-300/50 shadow-lg">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-semibold">
-              {user?.firstName?.[0]}
-            </div>
-            <div>
-              <div className="text-gray-800 font-semibold text-sm">
-                {user?.firstName}'s House
+        <div className="flex items-start justify-between mb-6 gap-4">
+          <div className="flex flex-col items-start gap-2">
+            {/* User Info */}
+            <div className="flex items-center gap-3 bg-white/80 backdrop-blur-xl rounded-2xl px-5 py-3 border border-gray-300/50 shadow-lg">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-semibold">
+                {user?.firstName?.[0]}
               </div>
-              <div className="text-gray-500 text-xs">Solar Dashboard</div>
+              <div>
+                <div className="text-gray-800 font-semibold text-sm">
+                  {user?.firstName}'s House
+                </div>
+                <div className="text-gray-500 text-xs">Solar Dashboard</div>
+              </div>
             </div>
+
+            {/* Active badge */}
+            {isActive && (
+              <div className="flex items-center gap-2 px-4 py-1.5 bg-white/80 border border-green-100 rounded-md shadow-md">
+                <span className="h-2.5 w-2.5 rounded-2xl bg-green-500" aria-hidden />
+                <span className="text-sm font-semibold text-gray-600">Unit Active</span>
+              </div>
+            )}
           </div>
 
           {/* Compact Weather Widget */}
