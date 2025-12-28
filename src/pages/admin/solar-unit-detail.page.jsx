@@ -46,7 +46,7 @@ export default function SolarUnitDetailPage() {
 
   if (isLoadingSolarUnit) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-200">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#f0f4f8] via-[#d9e8f5] to-[#e8f0f7]">
         <div className="bg-white/60 backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl px-6 py-4 text-gray-700">
           Loading solar unit...
         </div>
@@ -56,7 +56,7 @@ export default function SolarUnitDetailPage() {
 
   if (isErrorSolarUnit) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-200">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#f0f4f8] via-[#d9e8f5] to-[#e8f0f7]">
         <div className="bg-white/60 backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl px-6 py-4 text-red-700">
           Error: {errorSolarUnit?.message || "Unable to load solar unit"}
         </div>
@@ -94,7 +94,7 @@ export default function SolarUnitDetailPage() {
   ];
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gray-200">
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[#f0f4f8] via-[#d9e8f5] to-[#e8f0f7]">
       <div className="absolute inset-0 z-0">
         <div className="absolute -top-32 -left-24 h-72 w-72 rounded-full bg-blue-300/30 blur-3xl" />
         <div className="absolute top-10 right-0 h-64 w-64 rounded-full bg-amber-200/30 blur-3xl" />

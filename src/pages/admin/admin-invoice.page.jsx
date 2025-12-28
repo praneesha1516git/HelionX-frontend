@@ -40,9 +40,9 @@ export default function InvoicesPage() {
   
   if (isLoading) {
     return (
-          <p className="text-gray-700 font-medium">Loading invoices...</p>
-    
-   
+          <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#f0f4f8] via-[#d9e8f5] to-[#e8f0f7]">
+            <p className="text-gray-700 font-medium">Loading invoices...</p>
+          </div>
     );
   }
 
@@ -51,7 +51,7 @@ export default function InvoicesPage() {
     const status = error?.status || error?.originalStatus || "unknown";
     const data = error?.data || error?.error || null;
     return (
-      <div className="min-h-screen flex items-center justify-center  p-6">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#f0f4f8] via-[#d9e8f5] to-[#e8f0f7] p-6">
         <div className="bg-white/80 backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl p-8 max-w-2xl w-full">
           <div className="text-red-600 text-lg font-semibold mb-4">
             Error loading invoices (status: {String(status)})
@@ -88,7 +88,7 @@ export default function InvoicesPage() {
   const pagedInvoices = filteredByUser?.slice(start, end) || [];
 
   return (
-    <div className="min-h-screen relative overflow-hidden ">
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[#f0f4f8] via-[#d9e8f5] to-[#e8f0f7]">
 
 
       <main className="relative z-10 max-w-6xl mx-auto px-4 py-10">

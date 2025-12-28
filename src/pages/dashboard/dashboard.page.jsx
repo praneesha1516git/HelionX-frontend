@@ -27,7 +27,7 @@ const DashboardPage = () => {
 
   if (isLoadingSolarUnit) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#f0f4f8] via-[#d9e8f5] to-[#e8f0f7]">
         <div className="text-gray-800 text-xl">Loading...</div>
       </div>
     );
@@ -41,7 +41,7 @@ const DashboardPage = () => {
       "unknown";
     const data = errorSolarUnit?.data || errorSolarUnit?.error || null;
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-200 p-8">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#f0f4f8] via-[#d9e8f5] to-[#e8f0f7] p-8">
         <div className="bg-white/80 backdrop-blur-xl rounded-2xl p-6 border border-gray-300 max-w-2xl">
           <div className="text-gray-800 text-xl mb-4">
             Error loading solar unit (status: {String(status)})
@@ -58,7 +58,7 @@ const DashboardPage = () => {
   console.log("Solar Unit ID in DashboardPage:", solarUnit.serialNumber);
 
   return (
-    <div className="min-h-screen relative overflow-hidden ">
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[#f0f4f8] via-[#d9e8f5] to-[#e8f0f7]">
       {/* Background Image */}
       <div className="absolute inset-0 z-0 flex items-start justify-center pt-0 ">
         <img

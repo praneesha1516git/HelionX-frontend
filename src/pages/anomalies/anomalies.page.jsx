@@ -11,7 +11,11 @@ const AnomaliesPage = () => {
   const { data: solarUnit, isLoading: isLoadingSolarUnit, isError: isErrorSolarUnit, error: errorSolarUnit } = useGetSolarUnitForUserQuery();
 
   if (isLoadingSolarUnit) {
-    return <div>Loading...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#f0f4f8] via-[#d9e8f5] to-[#e8f0f7]">
+        <div className="text-gray-700 text-lg">Loading...</div>
+      </div>
+    );
   }
 
   if (isErrorSolarUnit) {
@@ -19,9 +23,15 @@ const AnomaliesPage = () => {
     const status = errorSolarUnit?.status || (errorSolarUnit?.originalStatus) || "unknown";
     const data = errorSolarUnit?.data || errorSolarUnit?.error || null;
     return (
-      <div>
-        <div>Error loading solar unit (status: {String(status)})</div>
-        <pre style={{whiteSpace: 'pre-wrap', marginTop: 8}}>{JSON.stringify(data, null, 2)}</pre>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#f0f4f8] via-[#d9e8f5] to-[#e8f0f7] px-6">
+        <div className="bg-white/80 backdrop-blur-xl border border-white/30 shadow-2xl rounded-2xl p-6 max-w-2xl w-full">
+          <div className="text-red-600 text-lg font-semibold mb-3">
+            Error loading solar unit (status: {String(status)})
+          </div>
+          <pre className="bg-white/70 border border-white/40 rounded-lg p-4 text-sm text-gray-800 overflow-auto">
+            {JSON.stringify(data, null, 2)}
+          </pre>
+        </div>
       </div>
     );
   }
@@ -29,7 +39,7 @@ const AnomaliesPage = () => {
   console.log(solarUnit);
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[#f0f4f8] via-[#d9e8f5] to-[#e8f0f7]">
       {/* soft background accents */}
       {/* <div className="absolute inset-0 z-0">
         <div className="absolute -top-32 -left-24 h-72 w-72 rounded-full bg-blue-300/30 blur-3xl" />

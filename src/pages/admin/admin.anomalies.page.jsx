@@ -7,7 +7,7 @@ const AnomaliesPage = () => {
   const { data: users } = useGetAllUsersQuery();
 
   return (
-    <div className="min-h-screen relative overflow-hidden ">
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[#f0f4f8] via-[#d9e8f5] to-[#e8f0f7]">
       {/* soft background accents */}
       {/* <div className="absolute inset-0 z-0">
         <div className="absolute -top-32 -left-24 h-72 w-72 rounded-full bg-blue-300/30 blur-3xl" />

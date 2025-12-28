@@ -17,7 +17,7 @@ export default function SolarUnitEditPage() {
 
   if (isLoadingSolarUnit) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-200">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#f0f4f8] via-[#d9e8f5] to-[#e8f0f7]">
         <div className="bg-white/60 backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl px-6 py-4 text-gray-700">
           Loading solar unit...
         </div>
@@ -27,7 +27,7 @@ export default function SolarUnitEditPage() {
 
   if (isErrorSolarUnit) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-200">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#f0f4f8] via-[#d9e8f5] to-[#e8f0f7]">
         <div className="bg-white/60 backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl px-6 py-4 text-red-700">
           Error: {errorSolarUnit?.data?.message || "Failed to load solar unit data."}
         </div>
@@ -36,7 +36,7 @@ export default function SolarUnitEditPage() {
   }
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gray-200">
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[#f0f4f8] via-[#d9e8f5] to-[#e8f0f7]">
      
 
       <main className="relative   px-4 py-0 ">

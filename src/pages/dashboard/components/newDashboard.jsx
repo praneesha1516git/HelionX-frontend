@@ -5,7 +5,7 @@ export default function SolarDashboard() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gray-100">
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[#f0f4f8] via-[#d9e8f5] to-[#e8f0f7]">
       {/* Background Image */}
       <div 
         className="absolute inset-0 z-0"

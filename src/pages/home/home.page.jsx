@@ -10,16 +10,13 @@ import Footer from "./components/footer/footer"
 
 const HomePage = () => {
   return (
-    <>
-      <main>
-     
-        <HeroSec2 />
-        <InfoCards />
-        <InfoCards2 />
-        <InfoCards4 />
-        <Footer />
-      </main>
-    </>
+    <main className="bg-white">
+      <HeroSec2 />
+      <InfoCards />
+      <InfoCards2 />
+      <InfoCards4 />
+      <Footer />
+    </main>
   );
 };
 

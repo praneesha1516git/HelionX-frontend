@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowRight, Zap, Maximize2, RefreshCw } from 'lucide-react';
-import solarImg from "./panel1.jpg";
+import solarImg from "./panel2.jpeg";
 
 export default function SunrockLanding() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,7 +16,7 @@ export default function SunrockLanding() {
           backgroundPosition: 'center',
         }}
       >
-        <div className="absolute inset-0 "></div>
+        <div className="absolute inset-0"></div>
       </div>
 
       {/* Content */}

@@ -3,7 +3,7 @@ import {SettingsTab} from "../admin/components/SettingsTab.jsx";
 
 export default function AdminPage()  {
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[#f0f4f8] via-[#d9e8f5] to-[#e8f0f7]">
       {/* soft background accents */}
       
       <main className="relative z-10 max-w-6xl mx-auto px-4 py-10 space-y-2">

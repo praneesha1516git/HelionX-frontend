@@ -36,7 +36,7 @@ export default function InvoicesPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#f0f4f8] via-[#d9e8f5] to-[#e8f0f7]">
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
           <p className="text-gray-600 font-medium">Loading invoices...</p>
@@ -50,7 +50,7 @@ export default function InvoicesPage() {
     const status = error?.status || error?.originalStatus || "unknown";
     const data = error?.data || error?.error || null;
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#f0f4f8] via-[#d9e8f5] to-[#e8f0f7] p-6">
         <div className="bg-white rounded-xl shadow-lg p-8 max-w-2xl w-full">
           <div className="text-red-600 text-lg font-semibold mb-4">
             Error loading invoices (status: {String(status)})
@@ -79,7 +79,7 @@ export default function InvoicesPage() {
   const pagedInvoices = filteredInvoices?.slice(start, end) || [];
 
   return (
-    <div className="min-h-screen relative overflow-hidden ">
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[#f0f4f8] via-[#d9e8f5] to-[#e8f0f7]">
    
 
       <main className="relative z-10 max-w-6xl mx-auto px-4 py-10">

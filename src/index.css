@@ -118,6 +118,9 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    background-color: #f0f4f8;
+    background-image: linear-gradient(to bottom, #f0f4f8, #d9e8f5, #e8f0f7);
+    min-height: 100vh;
   }
 }

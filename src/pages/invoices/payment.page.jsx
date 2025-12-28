@@ -20,7 +20,7 @@ export default function PaymentPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-200">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#f0f4f8] via-[#d9e8f5] to-[#e8f0f7]">
         <div className="text-center bg-white/40 backdrop-blur-xl border border-white/20 shadow-2xl px-6 py-4 rounded-2xl">
           <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4" />
           <p className="text-gray-700 font-medium">Loading payment details...</p>
@@ -34,7 +34,7 @@ export default function PaymentPage() {
     const status = error?.status || error?.originalStatus || "unknown";
     const data = error?.data || error?.error || null;
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-200 p-6">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#f0f4f8] via-[#d9e8f5] to-[#e8f0f7] p-6">
         <div className="bg-white/40 backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl p-8 max-w-2xl w-full">
           <div className="text-red-600 text-lg font-semibold mb-4">
             Error loading invoice (status: {String(status)})
@@ -50,7 +50,7 @@ export default function PaymentPage() {
 
   if (invoice.paymentStatus === "PAID") {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-200 p-6">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#f0f4f8] via-[#d9e8f5] to-[#e8f0f7] p-6">
         <div className="bg-white/40 backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl p-8 max-w-md w-full text-center">
           <div className="p-4 bg-green-100 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
             <Receipt className="w-8 h-8 text-green-600" />
@@ -64,7 +64,7 @@ export default function PaymentPage() {
   }
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gray-200">
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[#f0f4f8] via-[#d9e8f5] to-[#e8f0f7]">
       
       <main className="relative z-10 max-w-6xl mx-auto px-6 py-10 space-y-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
