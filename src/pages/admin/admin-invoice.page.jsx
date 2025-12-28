@@ -99,7 +99,7 @@ export default function InvoicesPage() {
              
               <div>
                 <h1 className="text-3xl font-bold text-gray-900">Invoices</h1>
-                <p className="text-gray-600 mt-1">Manage your solar energy billing</p>
+                <p className="text-gray-600 mt-1">View invoices accross all users</p>
               </div>
             </div>
           </div>
