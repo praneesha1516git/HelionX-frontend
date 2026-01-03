@@ -34,47 +34,29 @@ import ChartSkeleton from "./ChartSkeleton";
 
 const DataChart = ({solarUnitId}) => {
 
-    const [selectedRange, setSelectedRange] = useState("1"); // "1" (24h), "7", "30"
+    const [selectedRange, setSelectedRange] = useState("1"); // "24" (24h), "7", "30"
     const isHourly = selectedRange === "1";
-    const queryLimit = isHourly ? 24 : parseInt(selectedRange);
+    const queryLimit = isHourly ? 24 : parseInt(selectedRange, 10);
 
-    const {data , isLoading , isError , error} = useGetEnergyGenerationRecordsBySolarUnitQuery({
+    const {data: energyData , isLoading , isError , error} = useGetEnergyGenerationRecordsBySolarUnitQuery({
       id : solarUnitId,
       groupBy : isHourly ? "hour" : "date",
       limit : queryLimit,
     });
 
+    // Fallback: when there is no data in the past 24h, show the latest available day instead
+    const { data: fallbackDailyData } = useGetEnergyGenerationRecordsBySolarUnitQuery(
+      {
+        id: solarUnitId,
+        groupBy: "date",
+        limit: 1,
+      },
+      { skip: !isHourly }
+    );
+
     const handleRangeChange = (range) => {
       setSelectedRange(range);
     };
-
-const ChartSkeleton = ({ title, description, children }) => (
-  <Card className="w-full h-120 rounded-xl bg-white/80 backdrop-blur-xl border border-white/20 shadow-2xl">
-    <CardHeader>
-      <CardTitle className="flex items-center gap-2">
-        <div className="h-5 w-5 rounded bg-gray-200 animate-pulse" />
-        <span className="text-gray-500">{title}</span>
-      </CardTitle>
-      <CardDescription className="text-gray-400">{description}</CardDescription>
-      {children /* optional slot for filters/buttons so layout stays consistent */}
-    </CardHeader>
-    <CardContent>
-      <div className="h-72 w-full rounded-xl bg-gradient-to-b from-gray-200/60 to-gray-100/40 overflow-hidden">
-        <div className="absolute inset-0 animate-pulse bg-[radial-gradient(circle_at_20px_20px,rgba(255,255,255,0.4),transparent_40%)]" />
-        <div className="h-full flex items-end gap-2 px-6 pb-6">
-          {[...Array(10)].map((_, i) => (
-            <div
-              key={i}
-              className="flex-1 rounded-t-md bg-gray-300/80 animate-pulse"
-              style={{ height: `${30 + (i % 4) * 10}%` }}
-            />
-          ))}
-        </div>
-      </div>
-    </CardContent>
-  </Card>
-);
-
 
     if (isLoading) {
       return (
@@ -93,18 +75,28 @@ const ChartSkeleton = ({ title, description, children }) => (
       );
     }
 
-    if(!data || isError) return null;
+    const shouldFallbackToDaily =
+      isHourly &&
+      !isError &&
+      !isLoading &&
+      (!energyData || energyData.length === 0) &&
+      fallbackDailyData &&
+      fallbackDailyData.length > 0;
+
+    const chartSource = shouldFallbackToDaily ? fallbackDailyData : energyData;
+
+    if(!chartSource || isError) return null;
 
     // Prepare data for the chart based on the selected range
-   const lastSelectedRangeDaysEnergyProduction = isHourly
-    ? data
+   const lastSelectedRangeDaysEnergyProduction = isHourly && !shouldFallbackToDaily
+    ? chartSource
         .slice(0, queryLimit)
         .map((el) => ({
           date: `${String(el._id.hour).padStart(2, "0")}:00`,
           energy: el.totalEnergy,
         }))
-    : data
-        .slice(0, queryLimit)
+    : chartSource
+        .slice(0, shouldFallbackToDaily ? 1 : queryLimit)
         .filter((el) => el?._id?.date)
         .map((el) => {
           const parsed = parseISO(el._id.date)
@@ -133,7 +125,11 @@ console.log("chart data" , lastSelectedRangeDaysEnergyProduction);
       <CardHeader>
         <CardTitle>Energy Production Chart</CardTitle>
         <CardDescription>
-           {isHourly ? "Energy production over the past 24 hours." : `Energy production over the past ${selectedRange} days.`}
+           {isHourly && shouldFallbackToDaily
+             ? "No readings in the past 24 hours. Showing the last recorded day."
+             : isHourly
+               ? "Energy production over the past 24 hours."
+               : `Energy production over the past ${selectedRange} days.`}
         </CardDescription>
    
         
