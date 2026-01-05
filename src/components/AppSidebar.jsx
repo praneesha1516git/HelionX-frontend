@@ -118,7 +118,7 @@ export function AppSidebar() {
               <span className="ml-1">
                 <SignOutButton redirectUrl="/" />
               </span>
-              
+              <span className="ml-2">Sign out</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
